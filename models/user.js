@@ -1,6 +1,6 @@
 import { pool } from './bd.js'
 
-export const user_create = async (user_attributes) => {
+export const _create_user = async (user_attributes) => {
   const { nome, email, senha } = user_attributes;
 
   const query = `
@@ -11,4 +11,13 @@ export const user_create = async (user_attributes) => {
 
     return await pool.query(query, [nome, email, senha])
 };
+
+export const _get_user_by_email = async (email) =>{
+  const query = `
+      SELECT * FROM USUARIOS
+      WHERE EMAIL = $1
+    `
+
+  return await pool.query(query, [email])
+}
 

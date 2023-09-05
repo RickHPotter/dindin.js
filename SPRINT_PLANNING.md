@@ -16,8 +16,8 @@
 
 03. **DINDIN-3:** Implement user login (POST /login).
     - **Subtasks:** 
-     - Implement email and password validation.
-     - Generate and return authentication tokens. 
+     - ✅ Implement email and password validation.
+     - ✅ Generate and return authentication tokens. 
 
 04. **DINDIN-4:** Implement user listing (GET /login).
     - **Subtasks:** 
