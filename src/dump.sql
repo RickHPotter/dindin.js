@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS transacoes (
     tipo VARCHAR(36) NOT NULL
 );
 
-ALTER TABLE IF NOT EXISTS transacoes
-ADD FOREIGN KEY IF NOT EXISTS (categoria_id) REFERENCES categorias (id),
-ADD FOREIGN KEY IF NOT EXISTS (usuario_id) REFERENCES usuarios (id);
+ALTER TABLE IF EXISTS transacoes
+ADD FOREIGN KEY (categoria_id) REFERENCES categorias (id),
+ADD FOREIGN KEY (usuario_id) REFERENCES usuarios (id);
 
