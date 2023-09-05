@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt' 
+
 import {
   user_create 
 } from "../models/user.js"
@@ -6,14 +8,13 @@ import {
 //
 export const get_user = (_, res) => {  }
 
-export const get_users = (req, res) => { }
-
 // CREATE
 //
 export const create_user = async (req, res) => {
   const { nome, email, senha } = req.body
+  const crypt = await bcrypt.hash(senha, 10)
 
-  const user = { nome, email, senha }
+  const user = { nome, email, senha: crypt }
   const user_attributes = Object.keys(user)
 
   for (const field of user_attributes) {
@@ -24,11 +25,8 @@ export const create_user = async (req, res) => {
 
   try {
     const { rows } = await user_create(user)
-    const usuario = {
-      id: rows[0].id,
-      nome: rows[0].nome,
-      email: rows[0].email,
-    }
+    const usuario = rows[0]
+    delete usuario.senha
 
     return res.status(201).json(usuario)
   } catch (e) {
@@ -50,9 +48,9 @@ export const create_user = async (req, res) => {
 
 // UPDATE
 //
-export const update_bank_account_user = (req, res) => { }
+export const update_user = (req, res) => { }
 
 // DELETE
 //
-export const delete_bank_account = (req, res) => { }
+export const delete_user = (req, res) => { }
 
