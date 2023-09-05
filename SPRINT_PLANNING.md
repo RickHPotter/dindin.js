@@ -2,17 +2,17 @@
 
 01. **DINDIN-1:** Create a new PostgreSQL database named 'dindin'.
    - **Subtasks:** 
-     ✅ Write SQL script to create the 'usuarios' table.
-     ✅ Write SQL script to create the 'categorias' table.
-     ✅ Write SQL script to create the 'transacoes' table.
-     ✅ Populate the 'categorias' table with predefined categories.
-     ✅ Set up the Node.js server with Express.js.
+     - ✅ Write SQL script to create the 'usuarios' table.
+     - ✅ Write SQL script to create the 'categorias' table.
+     - ✅ Write SQL script to create the 'transacoes' table.
+     - ✅ Populate the 'categorias' table with predefined categories.
+     - ✅ Set up the Node.js server with Express.js.
 
 02. **DINDIN-2:** Implement user registration (POST /usuario).
    - **Subtasks:** 
-     ✅ Implement validation for required fields.
+     - ✅ Implement validation for required fields.
+     - ✅ Handle duplicate email registration.
      - Encrypt and store user passwords.
-     ✅ Handle duplicate email registration.
 
 03. **DINDIN-3:** Implement user login (POST /login).
    - **Subtasks:** 

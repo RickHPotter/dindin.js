@@ -32,10 +32,19 @@ export const create_user = async (req, res) => {
 
     return res.status(201).json(usuario)
   } catch (e) {
-    return res.status(500).json({ 
-      error: 'Erro Interno do Servidor.',
-      cause: e.detail
-    })
+    let status = 500
+    const obj = { }
+
+    switch (e.constraint) {
+      case 'usuarios_email_key':
+        status = 400
+        obj['mensagem'] = 'Já existe usuário cadastrado com o e-mail informado.'
+        break
+      default:
+        obj['mensagem'] = 'Erro Interno do Servidor.'
+    }
+    
+    return res.status(status).json(obj)
   }
 }
 
