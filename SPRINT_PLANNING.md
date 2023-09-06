@@ -26,11 +26,11 @@
 
 05. **DINDIN-5:** Implement updating user profile (PUT /usuario). 
     - **Subtasks:** 
-     - Validate required fields.
-     - Check for duplicate email while updating.
-     - Encrypt and update user password.
+     - ✅ Validate required fields.
+     - ✅ Check for duplicate email while updating.
+     - ✅ Encrypt and update user password.
 
-06. **DINDIN-6:** Implement listing categories (GET /categoria) and user transactions (GET /transacao).
+06. **DINDIN-6:** Implement listing categories (GET /categoria) and transactions (GET /transacao).
     - **Subtasks:** 
      - Filter transactions based on user.
      - Implement pagination if needed.
@@ -41,19 +41,22 @@
       - Check if the category exists.
       - Associate the transaction with the user.
 
-08. **DINDIN-8:** Implement getting transaction details (GET /transacao/:id) and updating transactions (PU /transacao/:id).
+08. **DINDIN-8:** Implement getting transaction details (GET /transacao/:id).
+
+09. **DINDIN-9:** Implement updating transactions (PUT /transacao/:id).
     - **Subtasks:** 
       - Validate required fields.
       - Check if the category exists.
       - Check if the transaction belongs to the user.
 
-09. **DINDIN-9:** Implement deleting transactions (DELETE /transacao/:id).
+10. **DINDIN-10:** Implement deleting transactions (DELETE /transacao/:id).
     - **Subtasks:** 
       - Check if the transaction belongs to the user.
 
-10. **DINDIN-10:** Implement getting transaction extrato (GET /transacao/extrato).
+11. **DINDIN-11:** Implement getting transaction extrato (GET /transacao/extrato).
 
-11. **DINDIN-11:** Implement filtering transactions by category (GET /transacao?filtro=[]).
+12. **DINDIN-12:** Implement filtering transactions by category (GET /transacao?filtro=[]).
     - **Subtasks:** 
       - Validate query parameter.
       - Filter transactions based on categories.
+

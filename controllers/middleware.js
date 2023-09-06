@@ -30,10 +30,12 @@ export const validate_token = async (req, res, next) => {
       })
     }
 
+    req.user_id = id
     req.user = user
-
   } catch (e) {
-    return res.status(401).json({ mensagem: 'Não Autorizado.', cause: e })
+    return res.status(401).json({ 
+      mensagem: "Para acessar este recurso um token de autenticação válido deve ser enviado."
+    })
   }
 
   next()
