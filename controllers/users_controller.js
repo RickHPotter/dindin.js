@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken' 
 
 import {
-  _get_user_by_email,
+  _get_user_by,
   _create_user 
 } from "../models/user.js"
 
@@ -12,7 +12,7 @@ const JWT_PASSWORD = 'noot noot'
 
 // READ
 //
-export const get_user = (_, res) => {  }
+export const get_user = (req, res) => { return res.json(req.user) }
 
 // CREATE
 //
@@ -31,10 +31,9 @@ export const create_user = async (req, res) => {
 
   try {
     const { rows } = await _create_user(user)
-    const usuario = rows[0]
-    delete usuario.senha
+    const { senha, ...user } = rows[0]
 
-    return res.status(201).json(usuario)
+    return res.status(201).json(user)
   } catch (e) {
     let status = 500
     const obj = { }
@@ -75,8 +74,8 @@ export const login = async (req, res) => {
   }
 
   try {
-    const { rows, rowCount } = await _get_user_by_email(email)
-    const user = rows[0]
+    const { rows, rowCount } = await _get_user_by({ email })
+    const { senha: password, ...user } = rows[0]
 
     if (rowCount === 0) {
       return res.status(400).json({
@@ -84,7 +83,7 @@ export const login = async (req, res) => {
       })
     }
 
-    const is_valid_pass = await bcrypt.compare(senha, user.senha)
+    const is_valid_pass = await bcrypt.compare(senha, password)
 
     if (!is_valid_pass) {
       return res.status(400).json({
@@ -92,9 +91,7 @@ export const login = async (req, res) => {
       })
     }
 
-    // generate JWT
     const token = jwt.sign({ id: user.id }, JWT_PASSWORD, { expiresIn: '1h' })
-    delete user.senha
 
     return res.status(201).json({ usuario: user, token })
   } catch (e) {

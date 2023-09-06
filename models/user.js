@@ -12,12 +12,24 @@ export const _create_user = async (user_attributes) => {
     return await pool.query(query, [nome, email, senha])
 };
 
-export const _get_user_by_email = async (email) =>{
+export const _get_user = async (conditions = '', terms = []) =>{
   const query = `
       SELECT * FROM USUARIOS
-      WHERE EMAIL = $1
+      WHERE 1 = 1
+      ${conditions}
     `
+  return await pool.query(query, terms)
+}
 
-  return await pool.query(query, [email])
+export const _get_user_by = async (obj) =>{
+  const keys = Object.keys(obj)
+  const values = Object.values(obj)
+  let conditions = ''
+
+  for (let i = 0; i < keys.length; i++) {
+    conditions += ` AND ${keys[i]} = $${i + 1} `
+  }
+
+  return await _get_user(conditions, values)
 }
 

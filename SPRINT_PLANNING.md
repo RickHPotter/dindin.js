@@ -21,7 +21,8 @@
 
 04. **DINDIN-4:** Implement user listing (GET /login).
     - **Subtasks:** 
-     - Only the user himself can access this page.
+     - ✅ Create callback for validating JWT.
+     - ✅ Allow only the user himself to access this req.
 
 05. **DINDIN-5:** Implement updating user profile (PUT /usuario). 
     - **Subtasks:** 
