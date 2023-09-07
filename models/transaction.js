@@ -8,17 +8,20 @@
 // tipo VARCHAR(36) NOT NULL
 //
 
+import { 
+  _get,
+  _create,
+  _update,
+  _delete
+} from './concern.js'
+
 // CONSTANTS
 //
 const TABLE = 'TRANSACOES'
 
 // SELECT
 //
-export const _get_transaction = async () =>{
-  return await _get(TABLE)
-}
-
-export const _get_transaction_by = async (fields) =>{
+export const _get_user_transactions_by = async (fields) =>{
   return await _get(TABLE, fields)
 }
 

@@ -31,7 +31,6 @@ export const create_user = async (req, res) => {
     return res.status(201).json(user_created)
   } catch (e) {
     const { status, json } = pg_catch(e.constraint)
-    console.log(json)
     return res.status(status).json(json)
   }
 }
@@ -55,7 +54,7 @@ export const update_user = async (req, res) => {
 
 // DELETE
 //
-export const delete_user = (req, res) => { }
+export const delete_user = (_req, _res) => { /* TODO */ }
 
 // LOGIN
 //

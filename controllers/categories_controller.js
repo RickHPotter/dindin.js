@@ -9,14 +9,20 @@ import {
 //
 export const get_categories = async (_, res) => { 
   try {
-    const { rows, rowCount } = await _get_category()
+    const { rows } = await _get_category()
     
-    if (rowCount === 0) {
-      return res.status(400).json({
-        mensagem: MSG.VALID_TOKEN_NO_USER
-      })
-    }
+    return res.json(rows)
+  } catch (e) {
+    return res.status(500).json({
+      mensagem: MSG.INTERNAL,
+    })
+  }
+}
 
+export const get_category_by = async (_, res, id) => { 
+  try {
+    const { rows } = await _get_category_by({ id })
+    
     return res.json(rows)
   } catch (e) {
     return res.status(500).json({

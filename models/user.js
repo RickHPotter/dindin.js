@@ -5,8 +5,6 @@
 // senha VARCHAR(256) NOT NULL
 //
 
-import { pool } from './bd.js'
-
 import { 
   _get,
   _create,

@@ -15,6 +15,10 @@ import {
   get_categories
 } from '../controllers/categories_controller.js'
 
+import {
+  get_user_transactions
+} from '../controllers/transactions_controller.js'
+
 const routes = express()
 
 routes.post('/usuario', create_user)
@@ -25,6 +29,7 @@ routes.get('/usuario', get_user)
 routes.put('/usuario', update_user)
 
 routes.get('/categoria', get_categories)
+routes.get('/transacao', get_user_transactions)
 
 export { routes } 
 

@@ -3,10 +3,7 @@
 // descricao VARCHAR(120) NOT NULL
 //
 
-import { 
-  _get,
-  _create,
-} from './concern.js'
+import { _get } from './concern.js'
 
 // CONSTANTS
 //
