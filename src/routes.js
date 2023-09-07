@@ -11,6 +11,10 @@ import {
   update_user
 } from '../controllers/users_controller.js'
 
+import {
+  get_categories
+} from '../controllers/categories_controller.js'
+
 const routes = express()
 
 routes.post('/usuario', create_user)
@@ -19,6 +23,8 @@ routes.post('/login', login)
 routes.use(validate_token)
 routes.get('/usuario', get_user)
 routes.put('/usuario', update_user)
+
+routes.get('/categoria', get_categories)
 
 export { routes } 
 

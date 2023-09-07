@@ -32,8 +32,7 @@
 
 06. **DINDIN-6:** Implement listing categories (GET /categoria) and transactions (GET /transacao).
     - **Subtasks:** 
-     - Filter transactions based on user.
-     - Implement pagination if needed.
+     - ✅ Filter transactions based on user.
 
 07. **DINDIN-7:** Implement creating transactions (POST /transacao).
     - **Subtasks:** 

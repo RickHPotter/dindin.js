@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt' 
 import jwt from 'jsonwebtoken' 
 
-import { MSG } from "../models/user.js"
+import { MSG } from '../models/concern.js'
 
 // PRIVATE
 //
 const JWT_PASSWORD = 'noot noot'
 
-const validate_user_attributes = (model, attributes = []) => {
+const validate_model_attributes = (model, attributes = []) => {
   const missing = Object.keys(model)
     .filter(e => !model[e] && model[e] !== 0)
     .filter(e => attributes.includes(e))
@@ -17,13 +17,13 @@ const validate_user_attributes = (model, attributes = []) => {
 
 // PUBLIC
 //
-export const prepare_create_update = async (req, res) => {
+export const prepare_user = async (req, res) => {
   const { nome, email, senha } = req.body
   const user = { nome, email, senha }
   const user_attributes = Object.keys(user)
   let error 
 
-  const missing = validate_user_attributes(user, user_attributes)
+  const missing = validate_model_attributes(user, user_attributes)
   if (missing.length) {
     const attributes = missing.join(', ')
     error = res.status(400).json({ mensagem: MSG.MISSING_FIELDS + attributes + '.' })

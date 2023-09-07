@@ -1,16 +1,17 @@
+import { MSG } from '../models/concern.js'
+
 import {
-  MSG,
   _get_user_by,
   _create_user,
   _update_user,
 } from "../models/user.js"
 
 import {
-  prepare_create_update,
+  prepare_user,
   pg_catch,
   validate_pass,
   generate_token
-} from '../helpers/users_helpers.js'
+} from './concern.js'
 
 // READ
 //
@@ -19,7 +20,7 @@ export const get_user = (req, res) => { return res.json(req.user) }
 // CREATE
 //
 export const create_user = async (req, res) => {
-  const { error, user } = await prepare_create_update(req, res)
+  const { error, user } = await prepare_user(req, res)
 
   if (error) return error
 
@@ -30,6 +31,7 @@ export const create_user = async (req, res) => {
     return res.status(201).json(user_created)
   } catch (e) {
     const { status, json } = pg_catch(e.constraint)
+    console.log(json)
     return res.status(status).json(json)
   }
 }
@@ -37,12 +39,12 @@ export const create_user = async (req, res) => {
 // UPDATE
 //
 export const update_user = async (req, res) => {
-  const { error, user } = await prepare_create_update(req, res)
+  const { error, user } = await prepare_user(req, res)
 
   if (error) return error
 
   try {
-    await _update_user({ ...user, id: req.user_id })
+    await _update_user(user, { id: req.user_id })
 
     return res.status(204).send()
   } catch (e) {
@@ -82,14 +84,13 @@ export const login = async (req, res) => {
     const invalid = await validate_pass(res, senha, password) 
     if (invalid) return invalid
 
-    const { error, token } = generate_token(user.id)
+    const { error, token } = generate_token(res, user.id)
     if (error) return error
 
     return res.status(201).json({ usuario: user, token })
   } catch (e) {
     return res.status(500).json({
       mensagem: MSG.INTERNAL,
-      cause: e
     })
   }
 }

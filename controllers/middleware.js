@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken' 
 
+import { MSG } from '../models/concern.js'
+
 import {
   _get_user_by
 } from "../models/user.js"
@@ -14,7 +16,7 @@ export const validate_token = async (req, res, next) => {
   const { authorization } = req.headers
 
   if (!authorization) {
-    return res.status(401).json({ mensagem: 'Não Autorizado.' })
+    return res.status(401).json({ mensagem: MSG.UNAUTHORISED })
   }
 
   const token = authorization.split(' ')[1]
@@ -26,7 +28,7 @@ export const validate_token = async (req, res, next) => {
 
     if (rowCount === 0) {
       return res.status(400).json({
-        mensagem: 'Usuário não mais existe. Contactar o banco pelo número 4402 8922.'
+        mensagem: MSG.VALID_TOKEN_NO_USER
       })
     }
 
@@ -34,7 +36,7 @@ export const validate_token = async (req, res, next) => {
     req.user = user
   } catch (e) {
     return res.status(401).json({ 
-      mensagem: "Para acessar este recurso um token de autenticação válido deve ser enviado."
+      mensagem: MSG.INVALID_TOKEN,
     })
   }
 
