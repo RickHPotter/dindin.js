@@ -35,7 +35,7 @@ export const validate_token = async (req, res, next) => {
     req.user_id = id
     req.user = user
   } catch (e) {
-    return res.status(401).json({ 
+    return res.status(403).json({ 
       mensagem: MSG.INVALID_TOKEN,
     })
   }

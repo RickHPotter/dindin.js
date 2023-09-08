@@ -37,7 +37,8 @@ const transaction_with_category = async (transaction) => {
 //
 export const get_user_transactions = async (req, res) => { 
   try {
-    const { rows: transactions } = await _get_user_transactions_by({ usuario_id: req.user_id })
+    const fields = { usuario_id: req.user_id }
+    const { rows: transactions } = await _get_user_transactions_by(fields)
 
     let json = []
     for (const transaction of transactions) {
@@ -46,6 +47,35 @@ export const get_user_transactions = async (req, res) => {
     }
 
     return res.json(json)
+  } catch (e) {
+    return res.status(500).json({
+      mensagem: MSG.INTERNAL,
+    })
+  }
+}
+
+export const get_user_transaction = async (req, res) => {
+  const id = req.params.id
+
+  if (isNaN(id)) {
+    return res.status(400).json({
+      mensagem: MSG.INVALID_TRANSACTION_ID,
+    })
+  }
+
+  try {
+    const fields = { id, usuario_id: req.user_id }
+    const { rows: transaction, rowCount } = await _get_user_transactions_by(fields)
+
+    if (rowCount === 0) {
+      return res.status(400).json({
+        mensagem: MSG.TRANSACTION_NOT_FOUND
+      })
+    }
+
+    const element = await transaction_with_category(transaction[0])
+
+    return res.json(element)
   } catch (e) {
     return res.status(500).json({
       mensagem: MSG.INTERNAL,

@@ -17,6 +17,7 @@ import {
 
 import {
   get_user_transactions,
+  get_user_transaction,
   create_transaction
 } from '../controllers/transactions_controller.js'
 
@@ -31,6 +32,7 @@ routes.put('/usuario', update_user)
 
 routes.get('/categoria', get_categories)
 routes.get('/transacao', get_user_transactions)
+routes.get('/transacao/:id', get_user_transaction)
 routes.post('/transacao', create_transaction)
 
 export { routes } 

@@ -41,6 +41,8 @@
      - ✅ Associate the transaction with the user.
 
 08. **DINDIN-8:** Implement getting transaction details (GET /transacao/:id).
+    - **Subtasks:** 
+     - ✅ Validate required fields.
 
 09. **DINDIN-9:** Implement updating transactions (PUT /transacao/:id).
     - **Subtasks:** 
