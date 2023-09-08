@@ -46,15 +46,15 @@
 
 09. **DINDIN-9:** Implement updating transactions (PUT /transacao/:id).
     - **Subtasks:** 
-     - Validate required fields.
-     - Check if the category exists.
-     - Check if the transaction belongs to the user.
+     - ✅ Validate required fields.
+     - ✅ Check if the category exists.
+     - ✅ Check if the transaction belongs to the user.
 
 10. **DINDIN-10:** Implement deleting transactions (DELETE /transacao/:id).
     - **Subtasks:** 
      - Check if the transaction belongs to the user.
 
-11. **DINDIN-11:** Implement getting transaction extrato (GET /transacao/extrato).
+11. **DINDIN-11:** Implement getting transaction income and outcome numbers (GET /transacao/extrato).
 
 12. **DINDIN-12:** Implement filtering transactions by category (GET /transacao?filtro=[]).
     - **Subtasks:** 

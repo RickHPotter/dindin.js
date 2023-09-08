@@ -2,7 +2,8 @@ import { MSG } from '../models/concern.js'
 
 import {
   _get_user_transactions_by,
-  _create_transaction
+  _create_transaction,
+  _update_transaction
 } from "../models/transaction.js"
 
 import {
@@ -96,6 +97,34 @@ export const create_transaction = async (req, res) => {
     const element = await transaction_with_category(transaction_created)
 
     return res.status(201).json(element)
+  } catch (e) {
+    const { status, json } = pg_catch(e.constraint)
+    return res.status(status).json(json)
+  }
+}
+
+// UPDATE
+//
+export const update_transaction = async (req, res) => {
+  const id = req.params.id 
+
+  const { error, transaction } = await prepare_transaction(req, res)
+
+  if (error) return error
+
+  const fields = { id, usuario_id: req.user_id }
+  const { rowCount } = await _get_user_transactions_by(fields)
+
+  if (rowCount === 0) {
+    return res.status(400).json({
+      mensagem: MSG.TRANSACTION_NOT_FOUND
+    })
+  }
+
+  try {
+    await _update_transaction(transaction, { id })
+
+    return res.status(204).send()
   } catch (e) {
     const { status, json } = pg_catch(e.constraint)
     return res.status(status).json(json)

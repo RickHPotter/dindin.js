@@ -33,7 +33,9 @@ export const _create_transaction = async (transaction_attributes) => {
 
 // UPDATE
 //
-export const _update_transaction = async (transaction_attributes) => { };
+export const _update_transaction = async (transaction_attributes, id) => {
+  return await _update(TABLE, transaction_attributes, id)
+};
 
 // DELETE
 //
