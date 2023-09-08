@@ -50,7 +50,7 @@ export const _create = async (table, attributes) => {
     `
 
   return await pool.query(query, values)
-};
+}
 
 // UPDATE
 //
@@ -76,9 +76,19 @@ export const _update = async (table, attributes, identifier) => {
     `
 
   return await pool.query(query, [...values, ...value])
-};
+}
 
 // DELETE
 //
-export const _delete = async (id) => { };
+export const _delete = async (table, id) => {
+  const key = Object.keys(id)
+  const value = Object.values(id)
+
+  const query = `
+      DELETE FROM ${table}
+      WHERE  ${key} = $1;
+    `
+
+  return await pool.query(query, value)
+}
 

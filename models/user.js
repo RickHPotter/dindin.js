@@ -29,11 +29,11 @@ export const _get_user_by = async (fields) => {
 //
 export const _create_user = async (user_attributes) => {
   return await _create(TABLE, user_attributes)
-};
+}
 
 // UPDATE
 //
 export const _update_user = async (user_attributes, id) => {
   return await _update(TABLE, user_attributes, id)
-};
+}
 

@@ -52,7 +52,7 @@
 
 10. **DINDIN-10:** Implement deleting transactions (DELETE /transacao/:id).
     - **Subtasks:** 
-     - Check if the transaction belongs to the user.
+     - ✅ Check if the transaction belongs to the user.
 
 11. **DINDIN-11:** Implement getting transaction income and outcome numbers (GET /transacao/extrato).
 

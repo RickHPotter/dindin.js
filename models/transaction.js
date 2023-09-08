@@ -29,19 +29,21 @@ export const _get_user_transactions_by = async (fields) =>{
 //
 export const _create_transaction = async (transaction_attributes) => { 
   return await _create(TABLE, transaction_attributes)
-};
+}
 
 // UPDATE
 //
 export const _update_transaction = async (transaction_attributes, id) => {
   return await _update(TABLE, transaction_attributes, id)
-};
+}
 
 // DELETE
 //
-export const _delete_transaction = async (id) => { };
+export const _delete_transaction = async (id) => {
+  return await _delete(TABLE, id)
+}
 
 // USER INTERACTIONS
 //
-export const _get_bank_statement = async (user_id) => { };
+export const _get_bank_statement = async (user_id) => { }
 
