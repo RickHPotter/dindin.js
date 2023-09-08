@@ -7,6 +7,8 @@ export const MSG = {
   EMAIL_TAKEN: 'Já existe usuário cadastrado com o e-mail informado.',
   INVALID_EMAIL: 'Email inválido.',
   INVALID_PASSWORD: 'Senha inválido.',
+  INVALID_CATEGORY: 'Categoria não existe.',
+  INVALID_TYPE: 'Tipo de Transação inválida. O tipo deve ser entrada ou saida.',
   INVALID_TOKEN: 'Para acessar este recurso, um token de autenticação válido deve ser enviado.',
   UNAUTHORISED: 'Não Autorizado!',
   VALID_TOKEN_NO_USER: 'Usuário não mais existe. Contactar o banco pelo número 4402 8922.',

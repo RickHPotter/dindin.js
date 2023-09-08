@@ -36,26 +36,26 @@
 
 07. **DINDIN-7:** Implement creating transactions (POST /transacao).
     - **Subtasks:** 
-      - Validate required fields.
-      - Check if the category exists.
-      - Associate the transaction with the user.
+     - ✅ Validate required fields.
+     - ✅ Check if the category exists.
+     - ✅ Associate the transaction with the user.
 
 08. **DINDIN-8:** Implement getting transaction details (GET /transacao/:id).
 
 09. **DINDIN-9:** Implement updating transactions (PUT /transacao/:id).
     - **Subtasks:** 
-      - Validate required fields.
-      - Check if the category exists.
-      - Check if the transaction belongs to the user.
+     - Validate required fields.
+     - Check if the category exists.
+     - Check if the transaction belongs to the user.
 
 10. **DINDIN-10:** Implement deleting transactions (DELETE /transacao/:id).
     - **Subtasks:** 
-      - Check if the transaction belongs to the user.
+     - Check if the transaction belongs to the user.
 
 11. **DINDIN-11:** Implement getting transaction extrato (GET /transacao/extrato).
 
 12. **DINDIN-12:** Implement filtering transactions by category (GET /transacao?filtro=[]).
     - **Subtasks:** 
-      - Validate query parameter.
-      - Filter transactions based on categories.
+     - Validate query parameter.
+     - Filter transactions based on categories.
 

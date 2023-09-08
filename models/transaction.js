@@ -27,7 +27,9 @@ export const _get_user_transactions_by = async (fields) =>{
 
 // INSERT
 //
-export const _create_transaction = async (transaction_attributes) => { };
+export const _create_transaction = async (transaction_attributes) => { 
+  return await _create(TABLE, transaction_attributes)
+};
 
 // UPDATE
 //

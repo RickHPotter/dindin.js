@@ -35,16 +35,43 @@ export const prepare_user = async (req, res) => {
   return { error, user }
 }
 
+export const prepare_transaction = async (req, res) => {
+  const { tipo, descricao, valor, data, categoria_id } = req.body
+  const transaction = { tipo, descricao, valor, data, usuario_id: req.user_id, categoria_id }
+  const transaction_attributes = Object.keys(transaction)
+  let error 
+
+  const missing = validate_model_attributes(transaction, transaction_attributes)
+  if (missing.length) {
+    const attributes = missing.join(', ')
+    error = res.status(400).json({ mensagem: MSG.MISSING_FIELDS + attributes + '.' })
+  }
+
+  transaction.tipo = tipo.toLowerCase()
+
+  if (transaction.tipo !== 'entrada' && transaction.tipo !== 'saida') {
+    error = res.status(400).json({ mensagem: MSG.INVALID_TYPE })
+  }
+
+  return { error, transaction }
+}
+
 export const pg_catch = (constraint) => {
-  let status = 500
+  let status = 400
   const json = { }
 
   switch (constraint) {
     case 'usuarios_email_key':
-      status = 400
       json.mensagem = MSG.EMAIL_TAKEN
       break
+    case 'transacoes_categoria_id_fkey':
+      json.messagem = MSG.INVALID_CATEGORY
+      break
+    case 'transacoes_usuario_id_fkey':
+      json.messagem = MSG.VALID_TOKEN_NO_USER
+      break
     default:
+      status = 500
       json.mensagem = MSG.INTERNAL
   }
 

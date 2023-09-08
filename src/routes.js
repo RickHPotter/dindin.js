@@ -16,7 +16,8 @@ import {
 } from '../controllers/categories_controller.js'
 
 import {
-  get_user_transactions
+  get_user_transactions,
+  create_transaction
 } from '../controllers/transactions_controller.js'
 
 const routes = express()
@@ -30,6 +31,7 @@ routes.put('/usuario', update_user)
 
 routes.get('/categoria', get_categories)
 routes.get('/transacao', get_user_transactions)
+routes.post('/transacao', create_transaction)
 
 export { routes } 
 
