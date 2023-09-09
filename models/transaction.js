@@ -9,7 +9,6 @@
 //
 
 import { 
-  select,
   insert,
   update,
   delete_from,
@@ -22,8 +21,28 @@ const TABLE = 'TRANSACOES'
 
 // SELECT
 //
-export const _get_user_transactions_by = async (fields) =>{
-  return await select(TABLE, fields)
+export const _get_user_transactions_by = async (fields, raw_conditions = '') =>{
+  const keys = Object.keys(fields)
+  const values = Object.values(fields)
+  let conditions = ''
+
+  for (let i = 0; i < keys.length; i++) {
+    conditions += `AND T.${keys[i]} = ${values[i]} `
+  }
+
+  const query = `
+    SELECT
+      T.ID, T.TIPO, T.DESCRICAO, T.VALOR, T.DATA, T.USUARIO_ID,
+      T.CATEGORIA_ID, C.DESCRICAO AS CATEGORIA_DESCRICAO
+    FROM TRANSACOES T
+    INNER JOIN CATEGORIAS C
+    ON C.ID = T.CATEGORIA_ID
+    WHERE 1 = 1
+      ${conditions}
+      ${raw_conditions};
+  `
+
+  return await raw(query)
 }
 
 // INSERT

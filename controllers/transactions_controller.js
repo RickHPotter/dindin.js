@@ -39,17 +39,24 @@ const transaction_with_category = async (transaction) => {
 // READ
 //
 export const get_user_transactions = async (req, res) => { 
-  try {
-    const fields = { usuario_id: req.user_id }
-    const { rows: transactions } = await _get_user_transactions_by(fields)
+  const { filtro } = req.query
+  let conditions = ''
+  if (filtro) {
+    let arr = []
 
-    let json = []
-    for (const transaction of transactions) {
-      const element = await transaction_with_category(transaction)
-      json.push(element)
+    for (const f of filtro) {
+      arr.push(`C.DESCRICAO ILIKE '%${f}%'`)
     }
 
-    return res.json(json)
+    conditions = `AND (${arr.join(' OR ')})`
+  }
+
+  const fields = { usuario_id: req.user_id }
+
+  try {
+    const { rows: transactions } = await _get_user_transactions_by(fields, conditions)
+
+    return res.json(transactions)
   } catch (e) {
     return res.status(500).json({
       mensagem: MSG.INTERNAL,
@@ -66,8 +73,9 @@ export const get_user_transaction = async (req, res) => {
     })
   }
 
+  const fields = { id, usuario_id: req.user_id }
+
   try {
-    const fields = { id, usuario_id: req.user_id }
     const { rows: transaction, rowCount } = await _get_user_transactions_by(fields)
 
     if (rowCount === 0) {
@@ -76,10 +84,9 @@ export const get_user_transaction = async (req, res) => {
       })
     }
 
-    const element = await transaction_with_category(transaction[0])
-
-    return res.json(element)
+    return res.json(transaction[0])
   } catch (e) {
+    console.log(e)
     return res.status(500).json({
       mensagem: MSG.INTERNAL,
     })

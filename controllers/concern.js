@@ -46,8 +46,9 @@ export const prepare_transaction = async (req, res) => {
     const attributes = missing.join(', ')
     error = res.status(400).json({ mensagem: MSG.MISSING_FIELDS + attributes + '.' })
   }
+  console.table(tipo)
 
-  transaction.tipo = tipo.toLowerCase()
+  transaction.tipo = transaction.tipo.toLowerCase()
 
   if (transaction.tipo !== 'entrada' && transaction.tipo !== 'saida') {
     error = res.status(400).json({ mensagem: MSG.INVALID_TYPE })

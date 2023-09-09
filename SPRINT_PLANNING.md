@@ -60,6 +60,6 @@
 
 12. **DINDIN-12:** Implement filtering transactions by category (GET /transacao?filtro=[]).
     - **Subtasks:** 
-     - Validate query parameter.
-     - Filter transactions based on categories.
+     - ✅ Validate query parameter.
+     - ✅ Filter transactions based on categories.
 
