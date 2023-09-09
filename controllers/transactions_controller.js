@@ -4,7 +4,8 @@ import {
   _get_user_transactions_by,
   _create_transaction,
   _update_transaction,
-  _delete_transaction
+  _delete_transaction,
+  _get_bank_statement
 } from "../models/transaction.js"
 
 import {
@@ -84,6 +85,24 @@ export const get_user_transaction = async (req, res) => {
     })
   }
 }
+
+export const bank_statement = async (_req, res) => {
+  try {
+    const { rows } = await _get_bank_statement()
+
+    let json = { }
+    for (const row of rows) {
+      json[row.tipo] = parseFloat(row.sum)
+    }
+
+    return res.json(json)
+  } catch (e) {
+    return res.status(500).json({
+      mensagem: MSG.INTERNAL,
+    })
+  }
+}
+
 
 // CREATE
 //

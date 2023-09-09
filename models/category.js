@@ -3,7 +3,7 @@
 // descricao VARCHAR(120) NOT NULL
 //
 
-import { _get } from './concern.js'
+import { select } from './concern.js'
 
 // CONSTANTS
 //
@@ -12,10 +12,10 @@ const TABLE = 'CATEGORIAS'
 // SELECT
 //
 export const _get_category = async () =>{
-  return await _get(TABLE)
+  return await select(TABLE)
 }
 
 export const _get_category_by = async (fields) =>{
-  return await _get(TABLE, fields)
+  return await select(TABLE, fields)
 }
 

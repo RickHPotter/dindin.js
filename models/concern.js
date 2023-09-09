@@ -19,7 +19,7 @@ export const MSG = {
 
 // SELECT
 //
-export const _get = async (table, attributes = {}) =>{
+export const select = async (table, attributes = {}) =>{
   const keys = Object.keys(attributes)
   const values = Object.values(attributes)
   let conditions = ''
@@ -36,9 +36,18 @@ export const _get = async (table, attributes = {}) =>{
   return await pool.query(query, values)
 }
 
+export const raw = async (query) =>{
+  const q = query.toLowerCase()
+  if (q.includes('delete from')) return
+  if (q.includes('alter table')) return
+  if (q.includes('drop table')) return
+  
+  return await pool.query(query)
+}
+
 // INSERT
 //
-export const _create = async (table, attributes) => {
+export const insert = async (table, attributes) => {
   const keys = Object.keys(attributes).join(', ')
   const values = Object.values(attributes)
   const format = values.map((_, index) => `$${index + 1}`).join(', ')
@@ -54,7 +63,7 @@ export const _create = async (table, attributes) => {
 
 // UPDATE
 //
-export const _update = async (table, attributes, identifier) => { 
+export const update = async (table, attributes, identifier) => { 
   const keys = Object.keys(attributes)
   const values = Object.values(attributes)
 
@@ -80,7 +89,7 @@ export const _update = async (table, attributes, identifier) => {
 
 // DELETE
 //
-export const _delete = async (table, id) => {
+export const delete_from = async (table, id) => {
   const key = Object.keys(id)
   const value = Object.values(id)
 

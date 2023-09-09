@@ -9,10 +9,11 @@
 //
 
 import { 
-  _get,
-  _create,
-  _update,
-  _delete
+  select,
+  insert,
+  update,
+  delete_from,
+  raw
 } from './concern.js'
 
 // CONSTANTS
@@ -22,28 +23,31 @@ const TABLE = 'TRANSACOES'
 // SELECT
 //
 export const _get_user_transactions_by = async (fields) =>{
-  return await _get(TABLE, fields)
+  return await select(TABLE, fields)
 }
 
 // INSERT
 //
 export const _create_transaction = async (transaction_attributes) => { 
-  return await _create(TABLE, transaction_attributes)
+  return await insert(TABLE, transaction_attributes)
 }
 
 // UPDATE
 //
 export const _update_transaction = async (transaction_attributes, id) => {
-  return await _update(TABLE, transaction_attributes, id)
+  return await update(TABLE, transaction_attributes, id)
 }
 
 // DELETE
 //
 export const _delete_transaction = async (id) => {
-  return await _delete(TABLE, id)
+  return await delete_from(TABLE, id)
 }
 
 // USER INTERACTIONS
 //
-export const _get_bank_statement = async (user_id) => { }
+export const _get_bank_statement = async () => {
+  const query = `SELECT TIPO, SUM(VALOR) FROM TRANSACOES GROUP BY TIPO;`
+  return await raw(query)
+}
 

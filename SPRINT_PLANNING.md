@@ -55,6 +55,8 @@
      - ✅ Check if the transaction belongs to the user.
 
 11. **DINDIN-11:** Implement getting transaction income and outcome numbers (GET /transacao/extrato).
+    - **Subtasks:** 
+     - ✅ Validate order of this route, given that it can collide with /transacao/:id.
 
 12. **DINDIN-12:** Implement filtering transactions by category (GET /transacao?filtro=[]).
     - **Subtasks:** 
